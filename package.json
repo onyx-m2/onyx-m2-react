@@ -1,0 +1,30 @@
+{
+  "name": "onyx-m2-react",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/onyx-m2/onyx-m2-react"
+  },
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "cross-env BABEL_ENV=production babel ./src --out-dir ./dist",
+    "start": "cross-env BABEL_ENV=development babel --watch ./src --out-dir ./dist"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-hotkeys-hook": "^2.4.0"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "onyx-m2-common": "^0.0.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.8",
+    "@babel/plugin-transform-react-jsx": "^7.12.17",
+    "@babel/preset-react": "^7.12.13",
+    "babel-preset-react-app": "^10.0.0",
+    "cross-env": "^7.0.3"
+  }
+}
