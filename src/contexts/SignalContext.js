@@ -107,7 +107,8 @@ export function useSignalDisplay(mnemonic, decimals, defaultValue) {
 
   let value = signalValue
   if (typeof(value) === 'number') {
-    value = value.toFixed(decimals)
+    const factor = Math.pow(10, decimals)
+    value = Math.round(value * factor) / factor
   }
 
   const definition = dbc.getSignal(mnemonic)
