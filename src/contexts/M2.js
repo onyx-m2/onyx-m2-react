@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useContext, useState, useMemo } from 'react'
 import { useHotkeys } from 'react-hotkeys-hook'
-import { DBC, NativeTransport, WebSocketTransport } from 'onyx-m2-common'
+import { DBC, NativeTransport, WebBluetoothTransport, WebSocketTransport } from 'onyx-m2-common'
 
 export const M2 = createContext()
 
@@ -18,6 +18,8 @@ export function M2Provider(props) {
     if (global.M2) {
       console.info('M2 interface detected, using native transport')
       transport = new NativeTransport(dbc)
+    } else if (config.ble) {
+      transport = new WebBluetoothTransport(dbc)
     } else {
       console.info('Using web socket transport')
       transport = new WebSocketTransport()
