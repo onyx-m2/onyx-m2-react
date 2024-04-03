@@ -12,20 +12,20 @@
     "start": "cross-env BABEL_ENV=development babel --watch ./src --out-dir ./dist"
   },
   "peerDependencies": {
-    "react": "^16.13.1",
-    "react-hotkeys-hook": "^2.4.0"
+    "react": "18.2.0",
+    "react-hotkeys-hook": "^4.5.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.15.4",
-    "axios": "^0.21.4",
+    "@babel/runtime": "^7.24.1",
+    "axios": "^1.6.8",
     "onyx-m2-common": "^0.0.7"
   },
   "devDependencies": {
-    "@babel/cli": "^7.15.7",
-    "@babel/core": "^7.15.8",
-    "@babel/plugin-transform-react-jsx": "^7.14.9",
-    "@babel/preset-react": "^7.14.5",
-    "babel-preset-react-app": "^10.0.0",
+    "@babel/cli": "^7.24.1",
+    "@babel/core": "^7.24.3",
+    "@babel/plugin-transform-react-jsx": "^7.23.4",
+    "@babel/preset-react": "^7.24.1",
+    "babel-preset-react-app": "^10.0.1",
     "cross-env": "^7.0.3"
   }
 }
