@@ -2,7 +2,7 @@
   "name": "onyx-m2-react",
   "repository": {
     "type": "git",
-    "url": "https://github.com/onyx-m2/onyx-m2-react"
+    "url": "git+https://github.com/onyx-m2/onyx-m2-react.git"
   },
   "version": "0.1.0",
   "license": "MIT",
