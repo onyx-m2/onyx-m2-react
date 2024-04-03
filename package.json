@@ -4,7 +4,7 @@
     "type": "git",
     "url": "git+https://github.com/onyx-m2/onyx-m2-react.git"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "prettier": {
     "semi": false,
