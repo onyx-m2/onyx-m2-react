@@ -31,11 +31,7 @@ export function M2Provider(props) {
     transport.connect(config)
   }, [config.server])
 
-  return (
-    <M2.Provider value={{ transport, dbc }}>
-      {children}
-    </M2.Provider>
-  )
+  return <M2.Provider value={{ transport, dbc }}>{children}</M2.Provider>
 }
 
 /**
@@ -48,8 +44,8 @@ export function M2Provider(props) {
  */
 export function usePingPongState(frequency, timeout) {
   const { transport } = useContext(M2)
-  const [ latency, setLatency ] = useState(0)
-  const [ connected, setConnected ] = useState(false)
+  const [latency, setLatency] = useState(0)
+  const [connected, setConnected] = useState(false)
 
   useEffect(() => {
     let at = 0
@@ -57,14 +53,13 @@ export function usePingPongState(frequency, timeout) {
     let previousCheck = Date.now() // guard against the browser being backgrounded
     const intervalId = setInterval(() => {
       const now = Date.now()
-      if (at !== 0 && ((now - previousCheck) > (2 * frequency))) {
+      if (at !== 0 && now - previousCheck > 2 * frequency) {
         if (now - at >= timeout) {
           setConnected(false)
           at = 0
           transport.reconnect()
         }
-      }
-      else {
+      } else {
         at = now
         transport.send('ping')
       }
@@ -84,7 +79,7 @@ export function usePingPongState(frequency, timeout) {
     }
   }, [transport, frequency, timeout])
 
-  return [ connected, latency ]
+  return [connected, latency]
 }
 
 /**
@@ -93,23 +88,27 @@ export function usePingPongState(frequency, timeout) {
  */
 export function useStatusState(options) {
   const { transport } = useContext(M2)
-  const [ online, setOnline ] = useState(false)
-  const [ ignoreOnlineStatus, setIgnoreOnlineStatus ] = useState(false)
-  const [ latency, setLatency ] = useState(0)
-  const [ rate, setRate ] = useState(0)
+  const [online, setOnline] = useState(false)
+  const [ignoreOnlineStatus, setIgnoreOnlineStatus] = useState(false)
+  const [latency, setLatency] = useState(0)
+  const [rate, setRate] = useState(0)
 
-  useHotkeys(options?.forceOnlineKey, () => {
-    setIgnoreOnlineStatus(true)
-    setOnline(true)
-  })
+  if (options?.forceOnlineKey) {
+    useHotkeys(options?.forceOnlineKey, () => {
+      setIgnoreOnlineStatus(true)
+      setOnline(true)
+    })
+  }
 
-  useHotkeys(options?.forceOfflineKey, () => {
-    setIgnoreOnlineStatus(true)
-    setOnline(false)
-  })
+  if (options?.forceOnlineKey) {
+    useHotkeys(options?.forceOfflineKey, () => {
+      setIgnoreOnlineStatus(true)
+      setOnline(false)
+    })
+  }
 
   useEffect(() => {
-    function handleStatus({ detail: [ online, latency, rate ] }) {
+    function handleStatus({ detail: [online, latency, rate] }) {
       if (!ignoreOnlineStatus) {
         setOnline(online)
       }
@@ -120,5 +119,5 @@ export function useStatusState(options) {
     return () => transport.removeEventListener('status', handleStatus)
   }, [transport, ignoreOnlineStatus])
 
-  return [ online, latency, rate ]
+  return [online, latency, rate]
 }
